@@ -1,0 +1,25 @@
+# Virtual Environment
+venv/
+
+# Python Cache
+__pycache__/
+*.py[cod]
+
+# Environment Variables
+.env
+
+# Streamlit Local Settings
+.streamlit/
+
+# Notebook Cache
+.ipynb_checkpoints/
+
+# Dataset
+datasets/
+
+# Ignore local test scripts
+test_connection.py
+
+# Operating System Files
+.DS_Store
+Thumbs.db
