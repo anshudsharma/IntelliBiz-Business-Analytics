@@ -7,22 +7,30 @@ from utils.config import Config
 class Database:
     """
     Database service for IntelliBiz Analytics Engine.
-    Handles MySQL connections and SQL query execution.
+    Handles MySQL/TiDB connections and SQL query execution.
     """
 
     def __init__(self):
         """
-        Initialize database connection using environment configuration.
+        Initialize database connection to TiDB Cloud.
         """
 
         connection_string = (
-            f"mysql+pymysql://{Config.DB_USER}:"
-            f"{Config.DB_PASSWORD}@{Config.DB_HOST}:"
-            f"{Config.DB_PORT}/{Config.DB_NAME}"
+            f"mysql+pymysql://"
+            f"3Wfwxj99pLxkSmM.root:"
+            f"{Config.DB_PASSWORD}@"
+            f"gateway01.ap-southeast-1.prod.aws.tidbcloud.com:"
+            f"4000/sys"
         )
 
         self.engine = create_engine(
-            connection_string
+            connection_string,
+            connect_args={
+                "ssl": {
+                    "ca": "/etc/ssl/certs/ca-certificates.crt"
+                }
+            },
+            pool_pre_ping=True
         )
 
     def execute_query(self, query, params=None):
